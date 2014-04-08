@@ -43,4 +43,3 @@ set obs 1000 <br> gen x=rbinomial(10,.1) | mydata$x <- rbinom(1000, 10, .1) | Ge
 count                          | nrow(mydata)                               | Count the number of observations in the data
 foreach v of varlist * { <br> rename \`v' \`v'old <br> } | names(mydata) <- paste0(names(mydata),"old") | Rename all of the variables in the data ...old
 clear <br> set obs 100 <br> gen x=rnormal(100) <br> gen y=x*2 + rnormal(100)*5 | mydata<-data.frame(x=x<-rnorm(100), y=x*2 + rnorm(100)*5)| Simulate a new data set with y dependent upon x
-egen id = group(x y)           | 1. within(mydata, {ID <- ave(ID, list(x, y), FUN=seq_along)}) <br> 2. mydata$ID <- with(mydata, ave(ID, list(x, y), FUN=seq_along)) <br> 3. mydata$ID <- ave(ID, list(mydata$x, mydata$y), FUN=seq_along)| Create an identifier ID from variables x and y
